@@ -16,6 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+node.default['tomcat']['service_actions'] = [:enable,:start]
 node.default['tomcat']['base_version'] = 6
 node.default['tomcat']['base_instance'] = "tomcat#{node['tomcat']['base_version']}"
 node.default['tomcat']['port'] = 8080
