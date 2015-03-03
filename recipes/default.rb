@@ -20,6 +20,7 @@
 # required for the secure_password method from the openssl cookbook
 ::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
 
+include_recipe "tomcat::_attributes"
 
 if node['tomcat']['base_version'].to_i == 7
   if platform_family?('rhel') and node[:platform_version].to_i < 7
