@@ -17,8 +17,10 @@ action :configure do
   if new_resource.name == 'base'
     instance = base_instance
     service_actions = new_resource.instance_variable_get("@service_actions")
+    Chef::Log.info("tomcat instance service actions: "+service_actions)
     if not service_actions
       service_actions = node['tomcat']['service_actions']
+      Chef::Log.info("General service actions: "+service_actions)
     end
 
     # If they weren't set explicitly, set these paths to the default
