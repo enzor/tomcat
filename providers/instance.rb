@@ -16,6 +16,10 @@ action :configure do
 
   if new_resource.name == 'base'
     instance = base_instance
+    service_actions = new_resource.instance_variable_get("@service_actions")
+    if not service_actions
+      service_actions = node['tomcat']['service_actions']
+    end
 
     # If they weren't set explicitly, set these paths to the default
     [:base, :home, :config_dir, :log_dir, :work_dir, :context_dir,
@@ -271,7 +275,7 @@ action :configure do
     else
       service_name "#{instance}"
     end
-    action [:start, :enable]
+    action service_actions
     notifies :run, "execute[wait for #{instance}]", :immediately
     retries 4
     retry_delay 30
