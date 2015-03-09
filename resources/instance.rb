@@ -3,6 +3,8 @@ default_action :configure
 
 # These would conflict if shared between instances and so don't make sense
 # to inherit from attributes
+attribute :service_actions,
+  :kind_of => [Array, String]
 attribute :name,
   :kind_of => String,
   :required => true,
