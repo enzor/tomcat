@@ -34,13 +34,12 @@ node['tomcat']['packages'].each do |pkg|
   end
 end
 
-node['tomcat']['deploy_manager_packages'].each do |pkg|
-  package pkg do
-    action :install
-  end
-end
-
 unless node['tomcat']['deploy_manager_apps']
+  node['tomcat']['deploy_manager_packages'].each do |pkg|
+    package pkg do
+      action :install
+    end
+  end
   directory "#{node['tomcat']['webapp_dir']}/manager" do
     action :delete
     recursive true
