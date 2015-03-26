@@ -81,7 +81,11 @@ class Chef
                     raise TomcatUserDataBagNotFound if e.message.match(/404/)
                     raise e
                   end
-                  decrypt_items(items)
+                  begin
+                    decrypt_items(items)
+                  rescue
+                    items
+                  end
                 end
 
         users.each { |user| validate_user_item(user) }
