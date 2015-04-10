@@ -5,10 +5,13 @@ Description=<%= @instance %> Apache Tomcat Application
 After=syslog.target network.target
 
 [Service]
-Type=forking
+Type=simple
 Environment="SERVICE_NAME=<%= @instance %>"
-ExecStart=/usr/sbin/tomcat-sysd start
-ExecStop=/usr/sbin/tomcat-sysd stop
+EnvironmentFile=/etc/sysconfig/<%= @instance %>
+#ExecStart=/usr/sbin/tomcat start
+#ExecStop=/usr/sbin/tomcat stop
+ExecStart=/usr/libexec/tomcat/server start
+ExecStop=/usr/libexec/tomcat/server stop
 SuccessExitStatus=143
 User=<%= @user %>
 Group=<%= @group %>
