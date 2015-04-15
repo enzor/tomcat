@@ -173,8 +173,12 @@ action :configure do
     end
   end
 
+  server_xml_cookbook = node['tomcat']['server_template_cookbook']
+  server_xml_source = node['tomcat']['server_template_source']
+  
   template "#{new_resource.config_dir}/server.xml" do
-    source 'server.xml.erb'
+    source server_xml_source
+    cookbook server_xml_cookbook
       variables ({
         :port => new_resource.port,
         :proxy_port => new_resource.proxy_port,
