@@ -16,6 +16,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+default['tomcat']['server_template_cookbook'] = 'tomcat'
+default['tomcat']['server_template_source'] = 'server.xml.erb'
+
 default['tomcat']['service_actions'] = [:enable,:start]
 default['tomcat']['port'] = 8080
 default['tomcat']['proxy_port'] = nil
