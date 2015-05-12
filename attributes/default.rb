@@ -16,6 +16,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+default['tomcat']['java.library.path'] = '/usr/lib64'
+
 default['tomcat']['server_template_cookbook'] = 'tomcat'
 default['tomcat']['server_template_source'] = 'server.xml.erb'
 
