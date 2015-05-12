@@ -18,10 +18,6 @@
 
 default['tomcat']['java.library.path'] = '/usr/lib64'
 
-# How to specify custom jmxremote files
-# default['tomcat']['jmxremote.access.file'] = '/etc/tomcat/jmxremote.access'
-# default['tomcat']['jmxremote.password.file'] = '/etc/tomcat/jmxremote.password'
-
 default['tomcat']['server_template_cookbook'] = 'tomcat'
 default['tomcat']['server_template_source'] = 'server.xml.erb'
 
