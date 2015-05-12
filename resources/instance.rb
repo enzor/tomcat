@@ -22,6 +22,8 @@ attribute :ajp_port,
 attribute :shutdown_port,
   :kind_of => Fixnum,
   :required => true
+attribute :jmx_port,
+  :kind_of => Fixnum
 
 # The rest will inherit from node attributes
 attribute :config_dir,
