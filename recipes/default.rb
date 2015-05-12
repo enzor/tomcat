@@ -77,6 +77,7 @@ node['tomcat']['instances'].each do |name, attrs|
     ssl_port attrs['ssl_port']
     ssl_proxy_port attrs['ssl_proxy_port']
     ajp_port attrs['ajp_port']
+    jmx_port attrs['jmx_port']
     shutdown_port attrs['shutdown_port']
     config_dir attrs['config_dir']
     log_dir attrs['log_dir']
