@@ -33,17 +33,7 @@ CATALINA_TMPDIR="<%= @tmp_dir %>"
 JAVA_OPTS="<%= @java_options %>"
 
 # Use JAVA_OPTS to set java.library.path for libtcnative.so
-<% if node['tomcat']['java.library.path'] -%>
-JAVA_OPTS="$JAVA_OPTS -Djava.library.path=<%= node['tomcat']['java.library.path'] %>"
-<% end -%>
-
-<% if node['tomcat']['jmxremote.password.file'] -%>
-JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote.password.file=node['tomcat']['jmxremote.password.file']"
-<% end -%>
-
-<% if node['tomcat']['jmxremote.access.file'] -%>
-JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote.access.file=node['tomcat']['jmxremote.access.file']"
-<% end -%>
+# JAVA_OPTS="-Djava.library.path=/usr/lib64"
 
 # What user should run tomcat
 TOMCAT_USER="<%= @user %>"
