@@ -33,7 +33,9 @@ CATALINA_TMPDIR="<%= @tmp_dir %>"
 JAVA_OPTS="<%= @java_options %>"
 
 # Use JAVA_OPTS to set java.library.path for libtcnative.so
-#JAVA_OPTS="-Djava.library.path=/usr/lib64"
+<% if node['tomcat']['java.library.path'] -%>
+JAVA_OPTS="-Djava.library.path=<%= node['tomcat']['java.library.path'] %>"
+<% end -%>
 
 # What user should run tomcat
 TOMCAT_USER="<%= @user %>"
