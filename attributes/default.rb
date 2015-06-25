@@ -22,6 +22,8 @@ default['tomcat']['server_template_cookbook'] = 'tomcat'
 default['tomcat']['server_template_source'] = 'server.xml.erb'
 
 default['tomcat']['service_actions'] = [:enable,:start]
+default['tomcat']['restart_action'] = [:restart]
+
 default['tomcat']['port'] = 8080
 default['tomcat']['proxy_port'] = nil
 default['tomcat']['ssl_port'] = 8443
