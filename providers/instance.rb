@@ -1,5 +1,6 @@
 action :configure do
   base_instance = node['tomcat']['base_instance']
+  restart_action = node['tomcat']['restart_action']
 
   # Set defaults for resource attributes from node attributes. We can't do
   # this in the resource declaration because node isn't populated yet when
@@ -140,7 +141,7 @@ action :configure do
       owner 'root'
       group 'root'
       mode '0644'
-      notifies :restart, "service[#{instance}]"
+      notifies restart_action, "service[#{instance}]", :delayed
     end
   when 'smartos'
     # SmartOS doesn't support multiple instances
@@ -149,7 +150,7 @@ action :configure do
       owner 'root'
       group 'root'
       mode '0644'
-      notifies :restart, "service[#{instance}]"
+      notifies restart_action, "service[#{instance}]", :delayed
     end
   else
     template "/etc/default/#{instance}" do
@@ -169,7 +170,7 @@ action :configure do
       owner 'root'
       group 'root'
       mode '0644'
-      notifies :restart, "service[#{instance}]"
+      notifies restart_action, "service[#{instance}]", :delayed
     end
   end
 
@@ -197,7 +198,7 @@ action :configure do
     owner 'root'
     group 'root'
     mode '0644'
-    notifies :restart, "service[#{instance}]"
+    notifies restart_action, "service[#{instance}]", :delayed
   end
 
   template "#{new_resource.config_dir}/logging.properties" do
@@ -205,7 +206,7 @@ action :configure do
     owner 'root'
     group 'root'
     mode '0644'
-    notifies :restart, "service[#{instance}]"
+    notifies restart_action, "service[#{instance}]", :delayed
   end
 
   if new_resource.ssl_cert_file.nil?
@@ -222,7 +223,7 @@ action :configure do
       umask 0007
       creates "#{new_resource.config_dir}/#{new_resource.keystore_file}"
       action :run
-      notifies :restart, "service[#{instance}]"
+      notifies restart_action, "service[#{instance}]", :delayed
     end
   else
     script "create_keystore-#{instance}" do
@@ -239,7 +240,7 @@ action :configure do
          -password pass:#{node['tomcat']['keystore_password']} \
          -out #{new_resource.keystore_file}
       EOH
-      notifies :restart, "service[tomcat]"
+      notifies restart_action, "service[tomcat]", :delayed
     end
 
     cookbook_file "#{new_resource.config_dir}/#{new_resource.ssl_cert_file}" do
