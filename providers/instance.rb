@@ -13,7 +13,7 @@ action :configure do
     if not new_resource.instance_variable_get("@#{attr}")
       new_resource.instance_variable_set("@#{attr}", node['tomcat'][attr])
     end
-  end 
+  end
 
   service_actions = new_resource.instance_variable_get("@service_actions")
   if not service_actions
@@ -127,7 +127,8 @@ action :configure do
   case node['platform_family']
   when 'rhel', 'fedora'
     template "/etc/sysconfig/#{instance}" do
-      source 'sysconfig_tomcat6.erb'
+      cookbook node['tomcat']['sysconfig_template_cookbook']
+      source node['tomcat']['sysconfig_template_source']
       variables ({
         :user => new_resource.user,
         :home => new_resource.home,
@@ -176,7 +177,7 @@ action :configure do
 
   server_xml_cookbook = node['tomcat']['server_template_cookbook']
   server_xml_source = node['tomcat']['server_template_source']
-  
+
   template "#{new_resource.config_dir}/server.xml" do
     source server_xml_source
     cookbook server_xml_cookbook

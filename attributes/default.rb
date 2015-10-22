@@ -20,6 +20,8 @@ default['tomcat']['java.library.path'] = '/usr/lib64'
 
 default['tomcat']['server_template_cookbook'] = 'tomcat'
 default['tomcat']['server_template_source'] = 'server.xml.erb'
+default['tomcat']['sysconfig_template_cookbook'] = 'tomcat'
+default['tomcat']['sysconfig_template_source'] = 'sysconfig_tomcat6.erb'
 
 default['tomcat']['service_actions'] = [:enable,:start]
 default['tomcat']['restart_action'] = [:restart]
