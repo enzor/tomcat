@@ -9,7 +9,7 @@ action :configure do
    :max_threads, :ssl_max_threads, :ssl_cert_file, :ssl_key_file,
    :ssl_chain_files, :keystore_file, :keystore_type, :truststore_file,
    :truststore_type, :certificate_dn, :loglevel, :tomcat_auth, :user,
-   :group, :tmp_dir, :lib_dir, :endorsed_dir].each do |attr|
+   :group, :lib_dir, :endorsed_dir].each do |attr|
     if not new_resource.instance_variable_get("@#{attr}")
       new_resource.instance_variable_set("@#{attr}", node['tomcat'][attr])
     end
@@ -36,7 +36,7 @@ action :configure do
 
     # If they weren't set explicitly, set these paths to the default with
     # the base instance name replaced with our own
-    [:base, :home, :config_dir, :log_dir, :work_dir, :context_dir,
+    [:base, :home, :config_dir, :log_dir, :work_dir, :tmp_dir, :context_dir,
      :webapp_dir].each do |attr|
       if not new_resource.instance_variable_get("@#{attr}") and node["tomcat"][attr]
         new = node["tomcat"][attr].sub(base_instance, instance)
@@ -51,7 +51,7 @@ action :configure do
         recursive true
       end
     end
-    [:log_dir, :work_dir, :webapp_dir].each do |attr|
+    [:log_dir, :work_dir, :tmp_dir, :webapp_dir].each do |attr|
       directory new_resource.instance_variable_get("@#{attr}") do
         mode '0755'
         recursive true
