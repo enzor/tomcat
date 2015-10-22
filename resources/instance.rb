@@ -40,7 +40,7 @@ attribute :webapp_dir,
 attribute :catalina_options,
   :kind_of => String
 attribute :java_options,
-  :kind_of => String
+  :kind_of => Object
 attribute :use_security_manager,
   :kind_of => [ TrueClass, FalseClass ]
 attribute :authbind,
