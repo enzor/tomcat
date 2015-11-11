@@ -118,7 +118,7 @@ action :configure do
       replace_or_add "fix-initd-#{instance}" do
         path "/etc/init.d/#{instance}"
         pattern "TOMCAT_CFG="
-        line "TOMCAT_CFG=/etc/sysconfig/tomcat-#{instance}"
+        line "TOMCAT_CFG=/etc/sysconfig/#{instance}"
       end
     end
   end
