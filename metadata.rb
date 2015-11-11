@@ -7,6 +7,7 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.17.3'
 
 depends 'java'
+depends 'line'
 depends 'openssl'
 depends 'yum-epel'
 

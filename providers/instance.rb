@@ -108,6 +108,13 @@ action :configure do
           perl -i -pe 's/#{base_instance}/#{instance}/g' /etc/init.d/#{instance}
         EOH
       end
+
+      # Patch init.d file to get multi-homed installation working on Centos6.7
+      replace_or_add "fix-initd-#{instance}" do
+        path "/etc/init.d/#{instance}"
+        pattern "TOMCAT_SCRIPT="
+        line "TOMCAT_SCRIPT=/usr/sbin/tomcat"
+      end
     end
   end
 
